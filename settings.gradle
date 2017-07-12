@@ -1,0 +1,1 @@
+include ':module_home', ':module_baselib', ':module_news'
