@@ -11,7 +11,7 @@ android {
 
     defaultConfig {
         if (isBuildModule.toBoolean()) {
-            applicationId "com.example.modulenews"
+            applicationId "com.hunter.modulenews"
         }
         minSdkVersion 15
         targetSdkVersion 25
