@@ -11,16 +11,16 @@ import retrofit2.http.Path;
  */
 
 public interface IApiServer {
-    /**
-     * 主页
-     */
-    @GET("data/{category}/{num}/{page}")
-    Observable<ResultBean<List<GankBean>>> getGirlList(@Path("category") String category, @Path("num") int num, @Path("page") int page);
-
-    /**
-     * 妹纸列表（/list?id=2&page=2&rows=20）
-     */
-    @FormUrlEncoded
-    @POST("tnfs/api/list?")
-    Observable<MeiZhiResultBean<List<MeiZhiBean>>> getMeiZhiList(@Field("id") int id, @Field("page") int page, @Field("rows") int rows);
+//    /**
+//     * 主页
+//     */
+//    @GET("data/{category}/{num}/{page}")
+//    Observable<ResultBean<List<GankBean>>> getGirlList(@Path("category") String category, @Path("num") int num, @Path("page") int page);
+//
+//    /**
+//     * 妹纸列表（/list?id=2&page=2&rows=20）
+//     */
+//    @FormUrlEncoded
+//    @POST("tnfs/api/list?")
+//    Observable<MeiZhiResultBean<List<MeiZhiBean>>> getMeiZhiList(@Field("id") int id, @Field("page") int page, @Field("rows") int rows);
 }
