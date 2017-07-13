@@ -14,12 +14,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mBtnNews= (Button) findViewById(R.id.btn_news);
-        mBtnNews.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ARouter.getInstance().build("/news/activity").navigation();
-            }
-        });
+//        mBtnNews= (Button) findViewById(R.id.btn_news);
+//        mBtnNews.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                ARouter.getInstance().build("/news/activity").navigation();
+//            }
+//        });
     }
 }
