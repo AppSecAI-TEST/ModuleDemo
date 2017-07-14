@@ -78,4 +78,7 @@ dependencies {
 
     //Android日志工具
     api 'com.orhanobut:logger:2.1.1'
+
+    //Recyclerview 动画
+    api 'jp.wasabeef:recyclerview-animators:2.2.7'
 }

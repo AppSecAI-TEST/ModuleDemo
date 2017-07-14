@@ -1,6 +1,5 @@
 package com.hunter.moduledemo.mvp.persenter;
 
-import android.content.Context;
 import android.util.Log;
 
 import com.example.modulebaselib.base.RxPresenter;
@@ -25,20 +24,27 @@ import io.reactivex.functions.Consumer;
 public class HomeListPresenter extends RxPresenter<HomeListContract.View>
         implements HomeListContract.Presenter {
 
+    private int page = 1;
+
     @Inject
     public HomeListPresenter() {
     }
 
     @Override
-    public void getMeiZhiData(String category, Context context) {
-        ApiHomeServerImpl.requestMeiZhiData(category, 10, 1)
+    public void getMeiZhiData(String category, final boolean refresh) {
+        if (refresh) {
+            page = 1;
+        } else {
+            ++page;
+        }
+        ApiHomeServerImpl.requestMeiZhiData(category, 10, page)
                 .compose(mView.<ResultBean<List<MeiZhiBean>>>bindToLife())
                 .compose(RxUtil.<ResultBean<List<MeiZhiBean>>>rxSchedulerHelper())
                 .compose(RxUtil.<List<MeiZhiBean>>handleResult())
                 .subscribe(new Consumer<List<MeiZhiBean>>() {
                     @Override
                     public void accept(List<MeiZhiBean> studentBeen) throws Exception {
-                        mView.displayData(studentBeen);
+                        mView.displayData(studentBeen, refresh);
                     }
                 }, new Consumer<Throwable>() {
                     @Override

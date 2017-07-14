@@ -29,7 +29,6 @@ android {
         dexInProcess true
         preDexLibraries true
         javaMaxHeapSize "8g"//越大越好
-        incremental true
     }
 }
 

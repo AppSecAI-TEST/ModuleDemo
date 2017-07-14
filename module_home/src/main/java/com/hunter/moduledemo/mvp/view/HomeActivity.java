@@ -1,9 +1,11 @@
 package com.hunter.moduledemo.mvp.view;
 
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
+import com.chad.library.adapter.base.animation.SlideInBottomAnimation;
 import com.example.modulebaselib.base.BaseActivity;
 import com.example.modulebaselib.base.BaseApplication;
 import com.hunter.moduledemo.R;
@@ -19,10 +21,13 @@ import java.util.List;
 import butterknife.BindView;
 
 public class HomeActivity extends BaseActivity<HomeListPresenter>
-        implements HomeListContract.View, BaseQuickAdapter.RequestLoadMoreListener {
+        implements HomeListContract.View, BaseQuickAdapter.RequestLoadMoreListener, SwipeRefreshLayout.OnRefreshListener {
 
     @BindView(R.id.rv_main_list)
     RecyclerView mRvMainList;
+
+    @BindView(R.id.home_swiperefresh_layout)
+    SwipeRefreshLayout mSwiperefreshLayout;
 
     private HomeListAdapter mAdapter;
 
@@ -41,7 +46,15 @@ public class HomeActivity extends BaseActivity<HomeListPresenter>
 
     @Override
     protected void initViewAndEvent() {
-        mPresenter.getMeiZhiData("福利", this);
+        mPresenter.getMeiZhiData("福利", true);
+
+//        SlideInUpAnimator animation =  new SlideInUpAnimator(new OvershootInterpolator(1f));
+//        mRvMainList.setItemAnimator(animation);
+
+        mSwiperefreshLayout.setOnRefreshListener(this);
+        mSwiperefreshLayout.setColorSchemeResources(android.R.color.holo_blue_bright,
+                android.R.color.holo_green_light,
+                android.R.color.holo_orange_light, android.R.color.holo_red_light);
 
         mAdapter = new HomeListAdapter();
         mAdapter.setEnableLoadMore(true);
@@ -49,6 +62,7 @@ public class HomeActivity extends BaseActivity<HomeListPresenter>
 
         GridLayoutManager layout = new GridLayoutManager(this, 2);
         mRvMainList.setLayoutManager(layout);
+        mAdapter.openLoadAnimation(new SlideInBottomAnimation());
         mRvMainList.setAdapter(mAdapter);
     }
 
@@ -58,12 +72,34 @@ public class HomeActivity extends BaseActivity<HomeListPresenter>
     }
 
     @Override
-    public void displayData(List<MeiZhiBean> list) {
-        mAdapter.addData(list);
+    public void displayData(List<MeiZhiBean> list, boolean refresh) {
+        if (refresh) {
+            mAdapter.setNewData(list);
+            mAdapter.loadMoreComplete();
+            mSwiperefreshLayout.setRefreshing(false);
+        } else {
+            if (list.size() <= 0 || list == null) {
+                mAdapter.loadMoreEnd();
+            } else {
+                mAdapter.addData(list);
+                mAdapter.loadMoreComplete();
+            }
+        }
     }
 
+    /**
+     * 加载更多
+     */
     @Override
     public void onLoadMoreRequested() {
+        mPresenter.getMeiZhiData("福利", false);
+    }
 
+    /**
+     * 刷新
+     */
+    @Override
+    public void onRefresh() {
+        mPresenter.getMeiZhiData("福利", true);
     }
 }
