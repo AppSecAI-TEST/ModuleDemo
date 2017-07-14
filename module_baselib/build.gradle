@@ -24,11 +24,13 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             buildConfigField "boolean","isBuildModule","${isBuildModule}"
+            buildConfigField "boolean","INPUT_LOG","${INPUT_LOG}"
         }
 
         debug {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             buildConfigField "boolean","isBuildModule","${isBuildModule}"
+            buildConfigField "boolean","INPUT_LOG","${INPUT_LOG}"
         }
     }
 }
@@ -74,4 +76,7 @@ dependencies {
 
     // android 4.4以上沉浸式状态栏实现
     api 'com.gyf.barlibrary:barlibrary:2.2.5'
+
+    //Android日志工具
+    api 'com.orhanobut:logger:2.1.1'
 }

@@ -30,4 +30,5 @@ dependencies {
     if (!isBuildModule.toBoolean()) {
         implementation project(':module_news')
     }
+    annotationProcessor 'com.google.dagger:dagger-compiler:2.11'
 }

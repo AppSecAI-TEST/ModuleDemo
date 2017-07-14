@@ -8,7 +8,7 @@ import com.trello.rxlifecycle2.LifecycleTransformer;
 
 public interface IBaseView {
     //显示错误信息
-    void showErrorMessage(String errorMsg);
+    void showErrorMsg(String errorMsg);
     /**
      * 绑定生命周期
      * @param <T>
