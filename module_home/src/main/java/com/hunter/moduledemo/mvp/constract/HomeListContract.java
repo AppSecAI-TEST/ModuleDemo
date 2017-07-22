@@ -1,14 +1,14 @@
 package com.hunter.moduledemo.mvp.constract;
 
-import com.example.modulebaselib.base.IBasePresenter;
-import com.example.modulebaselib.base.IBaseView;
+import com.hunter.modulebaselib.base.IBasePresenter;
+import com.hunter.modulebaselib.base.IBaseView;
 import com.hunter.moduledemo.mvp.bean.MeiZhiBean;
 
 import java.util.List;
 
 /**
  * Created by HeQuanli on 2017/7/14.
- * 类说明：主页列表契约契约
+ * 类说明：主页列表契约
  */
 
 public interface HomeListContract {

@@ -2,7 +2,7 @@ package com.hunter.moduledemo.dagger2.module;
 
 import android.app.Activity;
 
-import com.example.modulebaselib.dagger2.scopes.ActivityScope;
+import com.hunter.modulebaselib.dagger2.scopes.ActivityScope;
 
 import dagger.Module;
 import dagger.Provides;

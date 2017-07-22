@@ -2,8 +2,8 @@ package com.hunter.moduledemo.dagger2.component;
 
 import android.app.Activity;
 
-import com.example.modulebaselib.dagger2.component.ApplicationComponent;
-import com.example.modulebaselib.dagger2.scopes.ActivityScope;
+import com.hunter.modulebaselib.dagger2.component.ApplicationComponent;
+import com.hunter.modulebaselib.dagger2.scopes.ActivityScope;
 import com.hunter.moduledemo.dagger2.module.HomeActivityModule;
 import com.hunter.moduledemo.mvp.view.HomeActivity;
 

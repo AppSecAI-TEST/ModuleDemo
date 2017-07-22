@@ -1,8 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.example.modulebaselib">
+          package="com.hunter.modulebaselib">
 
     <application
-        android:name=".base.BaseApplication"
+        android:name="com.hunter.modulebaselib.base.BaseApplication"
         android:allowBackup="true"
         android:supportsRtl="true">
     </application>

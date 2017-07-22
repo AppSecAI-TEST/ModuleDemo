@@ -1,6 +1,6 @@
 package com.hunter.moduledemo.business;
 
-import com.example.modulebaselib.bean.ResultBean;
+import com.hunter.modulebaselib.bean.ResultBean;
 import com.hunter.moduledemo.mvp.bean.MeiZhiBean;
 
 import java.util.List;

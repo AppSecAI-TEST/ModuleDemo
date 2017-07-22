@@ -1,7 +1,7 @@
 package com.hunter.moduledemo.business;
 
-import com.example.modulebaselib.bean.ResultBean;
-import com.example.modulebaselib.http.RxRetrofit;
+import com.hunter.modulebaselib.bean.ResultBean;
+import com.hunter.modulebaselib.http.RxRetrofit;
 import com.hunter.moduledemo.mvp.bean.MeiZhiBean;
 import com.hunter.moduledemo.utils.HomeConstantUtils;
 

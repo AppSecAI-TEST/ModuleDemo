@@ -1,8 +1,8 @@
 package com.hunter.moduledemo.business;
 
-import com.example.modulebaselib.bean.ResultBean;
-import com.example.modulebaselib.http.RequestException;
-import com.example.modulebaselib.http.RxUtil;
+import com.hunter.modulebaselib.bean.ResultBean;
+import com.hunter.modulebaselib.http.RequestException;
+import com.hunter.modulebaselib.http.RxUtil;
 
 import io.reactivex.Observable;
 import io.reactivex.ObservableSource;

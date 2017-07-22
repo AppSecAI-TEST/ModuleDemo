@@ -7,6 +7,14 @@
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="dp_6">6dp</dimen>
     <dimen name="dp_16">16dp</dimen>
+    <dimen name="dp_26">26dp</dimen>
     <dimen name="dp_36">36dp</dimen>
+    <dimen name="dp_46">46dp</dimen>
+    <dimen name="dp_56">56dp</dimen>
+    <dimen name="dp_180">180dp</dimen>
+    <dimen name="dp_220">220dp</dimen>
+    <dimen name="dp_240">240dp</dimen>
     <dimen name="dp_280">280dp</dimen>
+
+    <dimen name="sp_20">20sp</dimen>
 </resources>

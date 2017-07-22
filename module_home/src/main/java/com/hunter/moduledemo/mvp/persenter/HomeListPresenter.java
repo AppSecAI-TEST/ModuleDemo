@@ -2,9 +2,9 @@ package com.hunter.moduledemo.mvp.persenter;
 
 import android.util.Log;
 
-import com.example.modulebaselib.base.RxPresenter;
-import com.example.modulebaselib.bean.ResultBean;
-import com.example.modulebaselib.http.RxUtil;
+import com.hunter.modulebaselib.base.RxPresenter;
+import com.hunter.modulebaselib.bean.ResultBean;
+import com.hunter.modulebaselib.http.RxUtil;
 import com.hunter.moduledemo.business.ApiHomeServerImpl;
 import com.hunter.moduledemo.mvp.bean.MeiZhiBean;
 import com.hunter.moduledemo.mvp.constract.HomeListContract;
