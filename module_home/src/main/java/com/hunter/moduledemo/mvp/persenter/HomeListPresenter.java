@@ -6,7 +6,10 @@ import com.hunter.modulebaselib.base.RxPresenter;
 import com.hunter.modulebaselib.bean.ResultBean;
 import com.hunter.modulebaselib.http.RxUtil;
 import com.hunter.moduledemo.business.ApiHomeServerImpl;
+import com.hunter.moduledemo.business.RxHome;
 import com.hunter.moduledemo.mvp.bean.MeiZhiBean;
+import com.hunter.moduledemo.mvp.bean.NowHeWeather5Bean;
+import com.hunter.moduledemo.mvp.bean.WeatherResultBean;
 import com.hunter.moduledemo.mvp.constract.HomeListContract;
 
 import java.util.List;
@@ -33,6 +36,7 @@ public class HomeListPresenter extends RxPresenter<HomeListContract.View>
     @Override
     public void getMeiZhiData(String category, final boolean refresh) {
         if (refresh) {
+
             page = 1;
         } else {
             ++page;
@@ -40,11 +44,35 @@ public class HomeListPresenter extends RxPresenter<HomeListContract.View>
         ApiHomeServerImpl.requestMeiZhiData(category, 10, page)
                 .compose(mView.<ResultBean<List<MeiZhiBean>>>bindToLife())
                 .compose(RxUtil.<ResultBean<List<MeiZhiBean>>>rxSchedulerHelper())
-                .compose(RxUtil.<List<MeiZhiBean>>handleResult())
+                .compose(RxHome.<List<MeiZhiBean>>handleMeizhiResult())
                 .subscribe(new Consumer<List<MeiZhiBean>>() {
                     @Override
                     public void accept(List<MeiZhiBean> studentBeen) throws Exception {
                         mView.displayData(studentBeen, refresh);
+                    }
+                }, new Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Exception {
+                        Log.d("HQL", throwable.getMessage());
+                    }
+                }, new Action() {
+                    @Override
+                    public void run() throws Exception {
+
+                    }
+                });
+    }
+
+    @Override
+    public void getNowWeather(String now, String city, String key) {
+        ApiHomeServerImpl.requestNowWeatherData(now, city, key)
+                .compose(mView.<WeatherResultBean<List<NowHeWeather5Bean>>>bindToLife())
+                .compose(RxUtil.<WeatherResultBean<List<NowHeWeather5Bean>>>rxSchedulerHelper())
+                .compose(RxHome.<List<NowHeWeather5Bean>>handleWeatherResult())
+                .subscribe(new Consumer<List<NowHeWeather5Bean>>() {
+                    @Override
+                    public void accept(List<NowHeWeather5Bean> beans) throws Exception {
+                        mView.showNowWeather(beans);
                     }
                 }, new Consumer<Throwable>() {
                     @Override

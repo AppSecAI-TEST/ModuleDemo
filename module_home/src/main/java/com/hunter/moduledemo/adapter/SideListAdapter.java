@@ -38,6 +38,18 @@ public class SideListAdapter extends BaseQuickAdapter<SideBean, BaseViewHolder> 
                 holder.setBackgroundRes(R.id.ll_sidebg, R.drawable.side_menu_weather);
                 holder.setTextColor(R.id.tv_sidename, resources.getColor(R.color.color_1AFA29));
                 break;
+            case 3:
+                holder.setBackgroundRes(R.id.ll_sidebg, R.drawable.side_menu_about);
+                holder.setTextColor(R.id.tv_sidename, resources.getColor(R.color.color_1AFA29));
+                break;
+            case 4:
+                holder.setBackgroundRes(R.id.ll_sidebg, R.drawable.side_menu_more);
+                holder.setTextColor(R.id.tv_sidename, resources.getColor(R.color.color_1AFA29));
+                break;
+            case 5:
+                holder.setBackgroundRes(R.id.ll_sidebg, R.drawable.side_menu_other);
+                holder.setTextColor(R.id.tv_sidename, resources.getColor(R.color.color_1AFA29));
+                break;
         }
     }
 }

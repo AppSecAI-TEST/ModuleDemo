@@ -1,12 +1,16 @@
 package com.hunter.moduledemo.mvp.view;
 
+import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.TextView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.animation.SlideInBottomAnimation;
@@ -19,6 +23,7 @@ import com.hunter.moduledemo.adapter.SideListAdapter;
 import com.hunter.moduledemo.dagger2.component.DaggerHomeActivityComponent;
 import com.hunter.moduledemo.dagger2.module.HomeActivityModule;
 import com.hunter.moduledemo.mvp.bean.MeiZhiBean;
+import com.hunter.moduledemo.mvp.bean.NowHeWeather5Bean;
 import com.hunter.moduledemo.mvp.bean.SideBean;
 import com.hunter.moduledemo.mvp.constract.HomeListContract;
 import com.hunter.moduledemo.mvp.persenter.HomeListPresenter;
@@ -27,6 +32,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class HomeActivity extends BaseActivity<HomeListPresenter>
         implements HomeListContract.View, BaseQuickAdapter.RequestLoadMoreListener,
@@ -38,6 +44,20 @@ public class HomeActivity extends BaseActivity<HomeListPresenter>
     SwipeRefreshLayout mSwiperefreshLayout;
     @BindView(R.id.drawer_layout)
     DrawerLayout mDrawerLayout;
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
+    @BindView(R.id.fab)
+    FloatingActionButton fab;
+    @BindView(R.id.side_menu)
+    RecyclerView sideMenu;
+    @BindView(R.id.tv_city)
+    TextView mTvCity;
+    @BindView(R.id.tv_time)
+    TextView mTvTime;
+    @BindView(R.id.tv_temp)
+    TextView mTvTemp;
+    @BindView(R.id.tv_state)
+    TextView mTvState;
 
     private HomeListAdapter mAdapter;
     private RecyclerView mRvMenuList;
@@ -63,6 +83,7 @@ public class HomeActivity extends BaseActivity<HomeListPresenter>
 
 
         mPresenter.getMeiZhiData("福利", true);
+        mPresenter.getNowWeather("now", "成都", "49c27061632b4ad6a6725b7bc9152dd3");
 
         mSwiperefreshLayout.setOnRefreshListener(this);
         mSwiperefreshLayout.setColorSchemeResources(android.R.color.holo_blue_bright,
@@ -84,11 +105,18 @@ public class HomeActivity extends BaseActivity<HomeListPresenter>
         mSideAdapter = new SideListAdapter();
         LinearLayoutManager mSideLayout = new LinearLayoutManager(this);
         mSideLayout.setOrientation(LinearLayoutManager.VERTICAL);
-        View view = LayoutInflater.from(this).inflate(R.layout.nav_header_main, null);
-        mSideAdapter.addHeaderView(view);
+        View header = LayoutInflater.from(this).inflate(R.layout.nav_header_main, null);
+        mSideAdapter.addHeaderView(header);
         mSideAdapter.openLoadAnimation(new SlideInRightAnimation());
         mRvMenuList.setLayoutManager(mSideLayout);
         mRvMenuList.setAdapter(mSideAdapter);
+    }
+
+    @Override
+    public void showNowWeather(List<NowHeWeather5Bean> list) {
+        mTvCity.setText(list.get(0).getBasic().getCnty() + "·" + list.get(0).getBasic().getCity());
+        mTvTemp.setText("Temp：" + list.get(0).getNow().getTmp() + " ℃");
+        mTvState.setText("State："+list.get(0).getNow().getCond().getTxt());
     }
 
     @Override
@@ -133,6 +161,10 @@ public class HomeActivity extends BaseActivity<HomeListPresenter>
         SideBean percenter = new SideBean("个人中心", R.drawable.ic_side_personalcenter);
         menu.add(percenter);
         SideBean weather = new SideBean("最近天气", R.drawable.ic_side_weather);
+        menu.add(weather);
+        menu.add(weather);
+        menu.add(weather);
+        menu.add(weather);
         menu.add(weather);
         return menu;
     }

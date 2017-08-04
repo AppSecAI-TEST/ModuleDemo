@@ -15,7 +15,9 @@ public interface IApi {
      */
     String MEIZHI_CATEGORY_URL = "http://www.tngou.net/tnfs/api/classify";
 
-    String SHOU_MEIZHI_URL="http://tnfs.tngou.net/img";
+    String SHOU_MEIZHI_URL = "http://tnfs.tngou.net/img";
+
+    String WEATHER_URL = "https://free-api.heweather.com/v5/";
 
     //http://www.tngou.net/tnfs/api/list?id=2&page=2&rows=20
 

@@ -7,4 +7,6 @@ package com.hunter.moduledemo.utils;
 
 public class HomeConstantUtils {
     public static final String REQUEST_URL = "http://gank.io/api/";
+
+    public static final  String WEATHER_URL = "https://free-api.heweather.com/";
 }

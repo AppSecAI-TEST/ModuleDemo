@@ -37,35 +37,6 @@ public class RxUtil
 
 
     /**
-     * 统一返回结果处理
-     *
-     * @param <T>
-     * @return
-     */
-    public static <T> ObservableTransformer<ResultBean<T>, T> handleResult()
-    {   //compose判断结果
-        return new ObservableTransformer<ResultBean<T>, T>()
-        {
-            @Override
-            public ObservableSource<T> apply(Observable<ResultBean<T>> upstream) {
-                return upstream.flatMap(new Function<ResultBean<T>, ObservableSource<T>>() {
-                    @Override
-                    public ObservableSource<T> apply(ResultBean<T> tResultBean) throws Exception {
-
-                        if (!tResultBean.isError())
-                        {
-                            return createData(tResultBean.getResults());
-                        } else
-                        {
-                            return Observable.error(new RequestException("服务器返回error"));
-                        }
-                    }
-                });
-            }
-        };
-    }
-
-    /**
      * 生成Observable
      *
      * @param <T>
