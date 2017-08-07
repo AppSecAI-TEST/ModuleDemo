@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -29,12 +30,11 @@ import com.hunter.moduledemo.mvp.bean.SideBean;
 import com.hunter.moduledemo.mvp.constract.HomeListContract;
 import com.hunter.moduledemo.mvp.persenter.HomeListPresenter;
 
-import junit.framework.Test;
-
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class HomeActivity extends BaseActivity<HomeListPresenter>
         implements HomeListContract.View, BaseQuickAdapter.RequestLoadMoreListener,
@@ -46,8 +46,6 @@ public class HomeActivity extends BaseActivity<HomeListPresenter>
     SwipeRefreshLayout mSwiperefreshLayout;
     @BindView(R.id.drawer_layout)
     DrawerLayout mDrawerLayout;
-    @BindView(R.id.toolbar)
-    Toolbar toolbar;
     @BindView(R.id.fab)
     FloatingActionButton fab;
     @BindView(R.id.side_menu)
@@ -60,6 +58,8 @@ public class HomeActivity extends BaseActivity<HomeListPresenter>
     TextView mTvTemp;
     @BindView(R.id.tv_state)
     TextView mTvState;
+    @BindView(R.id.toolbar)
+    Toolbar mToolbar;
 
     private HomeListAdapter mAdapter;
     private RecyclerView mRvMenuList;
@@ -81,6 +81,14 @@ public class HomeActivity extends BaseActivity<HomeListPresenter>
 
     @Override
     protected void initViewAndEvent() {
+
+        mToolbar.setTitle("妹纸");
+        setSupportActionBar(mToolbar);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, mDrawerLayout, mToolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        mDrawerLayout.addDrawerListener(toggle);
+        toggle.syncState();
+
         mRvMenuList = (RecyclerView) findViewById(R.id.side_menu);
 
 
@@ -203,5 +211,12 @@ public class HomeActivity extends BaseActivity<HomeListPresenter>
         ARouter.getInstance().build("/home/seepicture")
                 .with(bundle)
                 .navigation();
+    }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        // TODO: add setContentView(...) invocation
+        ButterKnife.bind(this);
     }
 }
