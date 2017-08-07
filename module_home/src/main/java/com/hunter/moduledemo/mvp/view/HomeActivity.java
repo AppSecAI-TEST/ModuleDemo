@@ -177,7 +177,6 @@ public class HomeActivity extends BaseActivity<HomeListPresenter>
         menu.add(weather);
         menu.add(weather);
         menu.add(weather);
-        menu.add(weather);
         return menu;
     }
 
@@ -211,12 +210,5 @@ public class HomeActivity extends BaseActivity<HomeListPresenter>
         ARouter.getInstance().build("/home/seepicture")
                 .with(bundle)
                 .navigation();
-    }
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
     }
 }
