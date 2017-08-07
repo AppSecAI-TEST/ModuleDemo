@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.animation.SlideInBottomAnimation;
 import com.chad.library.adapter.base.animation.SlideInRightAnimation;
@@ -28,15 +29,16 @@ import com.hunter.moduledemo.mvp.bean.SideBean;
 import com.hunter.moduledemo.mvp.constract.HomeListContract;
 import com.hunter.moduledemo.mvp.persenter.HomeListPresenter;
 
+import junit.framework.Test;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 public class HomeActivity extends BaseActivity<HomeListPresenter>
         implements HomeListContract.View, BaseQuickAdapter.RequestLoadMoreListener,
-        SwipeRefreshLayout.OnRefreshListener, DrawerLayout.DrawerListener {
+        SwipeRefreshLayout.OnRefreshListener, DrawerLayout.DrawerListener, BaseQuickAdapter.OnItemClickListener {
 
     @BindView(R.id.rv_main_list)
     RecyclerView mRvMainList;
@@ -94,12 +96,14 @@ public class HomeActivity extends BaseActivity<HomeListPresenter>
         mAdapter.setEnableLoadMore(true);
         mAdapter.setOnLoadMoreListener(this, mRvMainList);
 
+
         GridLayoutManager layout = new GridLayoutManager(this, 2);
         mRvMainList.setLayoutManager(layout);
         mAdapter.openLoadAnimation(new SlideInBottomAnimation());
-        mAdapter.setDuration(200);
+        mAdapter.setDuration(500);
         mRvMainList.setAdapter(mAdapter);
         mDrawerLayout.addDrawerListener(this);
+        mAdapter.setOnItemClickListener(this);
 
 
         mSideAdapter = new SideListAdapter();
@@ -116,7 +120,7 @@ public class HomeActivity extends BaseActivity<HomeListPresenter>
     public void showNowWeather(List<NowHeWeather5Bean> list) {
         mTvCity.setText(list.get(0).getBasic().getCnty() + "·" + list.get(0).getBasic().getCity());
         mTvTemp.setText("Temp：" + list.get(0).getNow().getTmp() + " ℃");
-        mTvState.setText("State："+list.get(0).getNow().getCond().getTxt());
+        mTvState.setText("State：" + list.get(0).getNow().getCond().getTxt());
     }
 
     @Override
@@ -189,5 +193,15 @@ public class HomeActivity extends BaseActivity<HomeListPresenter>
     @Override
     public void onDrawerStateChanged(int newState) {
 
+    }
+
+    @Override
+    public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+        MeiZhiBean data = (MeiZhiBean) adapter.getData().get(position);
+        Bundle bundle = new Bundle();
+        bundle.putSerializable("data", data);
+        ARouter.getInstance().build("/home/seepicture")
+                .with(bundle)
+                .navigation();
     }
 }

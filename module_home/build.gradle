@@ -38,6 +38,7 @@ dependencies {
     if (!isBuildModule.toBoolean()) {
         implementation project(':module_news')
     }
+    annotationProcessor 'com.alibaba:arouter-compiler:1.1.2.1'
     annotationProcessor 'com.google.dagger:dagger-compiler:2.11'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.7.0'
 }

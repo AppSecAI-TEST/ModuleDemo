@@ -5,6 +5,7 @@ import android.widget.ImageView;
 import com.bumptech.glide.Glide;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
+import com.hunter.modulebaselib.utils.imageload.ImageLoaderUtils;
 import com.hunter.moduledemo.R;
 import com.hunter.moduledemo.mvp.bean.MeiZhiBean;
 
@@ -21,8 +22,7 @@ public class HomeListAdapter extends BaseQuickAdapter<MeiZhiBean, BaseViewHolder
 
     @Override
     protected void convert(BaseViewHolder holder, MeiZhiBean item) {
-        //ImageLoaderUtils.dispalyImage(item.getUrl(), (ImageView) holder.getView(R.id.iv_pic));
-        Glide.with(holder.getView(R.id.iv_pic).getContext()).load(item.getUrl()).into((ImageView)holder.getView(R.id.iv_pic));
+        ImageLoaderUtils.dispalyImage(item.getUrl(), (ImageView) holder.getView(R.id.iv_pic));
         holder.setText(R.id.tv_date, item.getPublishedAt());
     }
 }

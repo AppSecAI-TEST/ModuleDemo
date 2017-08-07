@@ -1,11 +1,13 @@
 package com.hunter.moduledemo.mvp.bean;
 
+import java.io.Serializable;
+
 /**
  * Created by HeQuanli on 2017/7/14.
  * 类说明：
  */
 
-public class MeiZhiBean {
+public class MeiZhiBean implements Serializable{
 
     /**
      * _id : 5966c4b8421aa90ca209c452

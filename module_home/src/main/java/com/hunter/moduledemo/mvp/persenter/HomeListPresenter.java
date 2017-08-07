@@ -41,7 +41,7 @@ public class HomeListPresenter extends RxPresenter<HomeListContract.View>
         } else {
             ++page;
         }
-        ApiHomeServerImpl.requestMeiZhiData(category, 10, page)
+        ApiHomeServerImpl.requestMeiZhiData(category, 50, page)
                 .compose(mView.<ResultBean<List<MeiZhiBean>>>bindToLife())
                 .compose(RxUtil.<ResultBean<List<MeiZhiBean>>>rxSchedulerHelper())
                 .compose(RxHome.<List<MeiZhiBean>>handleMeizhiResult())
