@@ -1,7 +1,5 @@
 package com.hunter.modulebaselib.http;
 
-import android.text.TextUtils;
-
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
@@ -14,16 +12,12 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RxRetrofitClient {
 
-    private static final int DEFAULT_TIMEOUT = 5;
-
     private OkHttpClient okHttpClient = RxOkHttpClient.getInstance();
-
-    public static String baseUrl = IApi.REQUEST_URL;
-
 
     private static RxRetrofitClient mRetrofitInstance;
 
-    private Retrofit mRetrofit;
+    private RxRetrofitClient() {
+    }
 
     public static RxRetrofitClient getInstance() {
         if (mRetrofitInstance == null) {
@@ -36,30 +30,12 @@ public class RxRetrofitClient {
         return mRetrofitInstance;
     }
 
-
-    public static RxRetrofitClient getInstance(String url) {
-        mRetrofitInstance = new RxRetrofitClient(url);
-        return mRetrofitInstance;
-    }
-
-    private RxRetrofitClient() {
-        this(null);
-    }
-
-    private RxRetrofitClient(String url) {
-
-        if (TextUtils.isEmpty(url)) {
-            url = baseUrl;
-        }
+    public Retrofit RxRetrofitClient(String baseurl) {
         Retrofit.Builder builder = new Retrofit.Builder();
         builder.client(okHttpClient);
         builder.addConverterFactory(GsonConverterFactory.create());
         builder.addCallAdapterFactory(RxJava2CallAdapterFactory.create());
-        builder.baseUrl(url);
-        mRetrofit = builder.build();
-    }
-
-    public Retrofit getRetrofit() {
-        return mRetrofit;
+        builder.baseUrl(baseurl);
+        return builder.build();
     }
 }
