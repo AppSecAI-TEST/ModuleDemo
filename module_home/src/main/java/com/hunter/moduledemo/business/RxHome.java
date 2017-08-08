@@ -43,7 +43,7 @@ public class RxHome {
     }
 
     /**
-     * 统一返回妹纸结果处理
+     * 统一返回天气结果处理
      *
      * @param <T>
      * @return
