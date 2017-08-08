@@ -29,8 +29,6 @@ public class RxHome {
                 return upstream.flatMap(new Function<ResultBean<T>, ObservableSource<T>>() {
                     @Override
                     public ObservableSource<T> apply(ResultBean<T> tResultBean) throws Exception {
-
-
                         if (tResultBean != null) {
                             return RxUtil.createData(tResultBean.getResults());
                         } else {
