@@ -2,6 +2,7 @@ package com.hunter.moduledemo.mvp.view;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -34,7 +35,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 
 public class HomeActivity extends BaseActivity<HomeListPresenter>
         implements HomeListContract.View, BaseQuickAdapter.RequestLoadMoreListener,
@@ -207,8 +207,15 @@ public class HomeActivity extends BaseActivity<HomeListPresenter>
         MeiZhiBean data = (MeiZhiBean) adapter.getData().get(position);
         Bundle bundle = new Bundle();
         bundle.putSerializable("data", data);
-        ARouter.getInstance().build("/home/seepicture")
+
+        //转场动画，共享元素。
+        ActivityOptionsCompat compat = ActivityOptionsCompat.
+                makeSceneTransitionAnimation(this, view, "animview");
+
+        ARouter.getInstance()
+                .build("/home/seepicture")
+                .withOptionsCompat(compat)
                 .with(bundle)
-                .navigation();
+                .navigation(this);
     }
 }

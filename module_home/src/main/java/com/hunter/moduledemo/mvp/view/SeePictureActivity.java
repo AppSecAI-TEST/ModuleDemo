@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.Toast;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.hunter.modulebaselib.utils.imageload.ImageLoaderUtils;

@@ -1,8 +1,11 @@
 package com.hunter.modulebaselib.base;
 
 import android.app.Activity;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.transition.Slide;
+import android.transition.Transition;
 
 import com.trello.rxlifecycle2.LifecycleTransformer;
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
@@ -29,6 +32,9 @@ public abstract class BaseActivity<T extends IBasePresenter>
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (Build.VERSION.SDK_INT >= 21) {
+            initTransition();
+        }
         setContentView(getLayout());
         mUnBinder = ButterKnife.bind(this);
         mContext = this;
@@ -38,6 +44,18 @@ public abstract class BaseActivity<T extends IBasePresenter>
         }
         BaseApplication.getInstance().addActivity(this);
         initViewAndEvent();
+    }
+
+    /**
+     * 初始化转场动画
+     */
+    private void initTransition() {
+        getWindow().requestFeature(android.view.Window.FEATURE_CONTENT_TRANSITIONS);
+        Transition ts = new Slide();  //Slide(); //Explode();
+//        ts.setStartDelay(2000);
+//        ts.setDuration(5000);
+        getWindow().setEnterTransition(ts);
+      //  getWindow().setExitTransition(ts);
     }
 
     @Override

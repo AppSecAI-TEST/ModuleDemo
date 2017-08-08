@@ -23,19 +23,19 @@ import okhttp3.logging.HttpLoggingInterceptor;
  * 对网络请求的封装
  * Created by HeQuanLi on 2016/8/3.
  */
-public class RxRetrofit {
+public class RxOkHttpClient {
 
     private static OkHttpClient instance = null;
     //定义日志显示级别
     private static HttpLoggingInterceptor.Level level = HttpLoggingInterceptor.Level.BODY;
 
-    private RxRetrofit() {
+    private RxOkHttpClient() {
         throw new UnsupportedOperationException("you can't instantiate me...");
     }
 
     public static OkHttpClient getInstance() {
         if (instance == null) {
-            synchronized (RxRetrofit.class) {
+            synchronized (RxOkHttpClient.class) {
                 if (instance == null) {
                     instance = new OkHttpClient.Builder()
                             .cache(setCacheSize())
@@ -49,14 +49,6 @@ public class RxRetrofit {
         }
         return instance;
     }
-
-//    private static OkHttpClient httpClient = new OkHttpClient.Builder()
-//            .cache(setCacheSize())
-//            .connectTimeout(30, TimeUnit.SECONDS)
-//            .addInterceptor(setCacheInterceptor())
-//            .addInterceptor(setLog().setLevel(level))
-//            .readTimeout(30, TimeUnit.SECONDS)
-//            .build();
 
     /**
      * 设置缓存路径与大小
