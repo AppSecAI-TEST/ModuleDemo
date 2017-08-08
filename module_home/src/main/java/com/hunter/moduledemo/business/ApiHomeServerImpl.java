@@ -22,33 +22,18 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class ApiHomeServerImpl {
 
-    private static RxRetrofitClient instance;
-
-
-    private static IApiHomeServer mMeiZhiServer = new Retrofit.Builder()
-            .baseUrl(HomeConstantUtils.REQUEST_URL)
-            .addConverterFactory(GsonConverterFactory.create())
-            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-            .client(RxOkHttpClient.getInstance())
-            .build()
-            .create(IApiHomeServer.class);
-
-    private static IApiHomeServer mNowWeatherServer = new Retrofit.Builder()
-            .baseUrl(HomeConstantUtils.WEATHER_URL)
-            .addConverterFactory(GsonConverterFactory.create())
-            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-            .client(RxOkHttpClient.getInstance())
-            .build()
-            .create(IApiHomeServer.class);
-
-
     public static Observable<ResultBean<List<MeiZhiBean>>> requestMeiZhiData(String category, int num, int page) {
-        instance = RxRetrofitClient.getInstance(HomeConstantUtils.REQUEST_URL);
-        return instance.getRetrofit().create(IApiHomeServer.class).getMeiZhiList(category, num, page);
+        return RxRetrofitClient.getInstance()
+                .RxRetrofitClient(HomeConstantUtils.REQUEST_URL)
+                .create(IApiHomeServer.class)
+                .getMeiZhiList(category, num, page);
     }
 
     public static Observable<WeatherResultBean<List<NowHeWeather5Bean>>> requestNowWeatherData(String category,
                                                                                                String city, String key) {
-        return mNowWeatherServer.getNowWeather( category,city, key);
+        return RxRetrofitClient.getInstance()
+                .RxRetrofitClient(HomeConstantUtils.WEATHER_URL)
+                .create(IApiHomeServer.class)
+                .getNowWeather(category, city, key);
     }
 }
