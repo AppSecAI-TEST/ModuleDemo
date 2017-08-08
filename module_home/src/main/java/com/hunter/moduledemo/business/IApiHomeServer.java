@@ -17,7 +17,7 @@ import retrofit2.http.Query;
  * 类说明：
  */
 
-public interface IApiHomeServer  {
+public interface IApiHomeServer {
     /**
      * 主页
      */
