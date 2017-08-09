@@ -40,6 +40,12 @@ public class RxRetrofitClient {
         mRetrofit = builder.build();
     }
 
+    /**
+     * 创建service
+     * @param service
+     * @param <T>
+     * @return
+     */
     public <T> T create(final Class<T> service) {
         if (service == null) {
             throw new RuntimeException("Api service is null!");
