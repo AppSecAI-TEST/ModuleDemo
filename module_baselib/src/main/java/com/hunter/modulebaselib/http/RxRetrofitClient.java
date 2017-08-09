@@ -31,7 +31,7 @@ public class RxRetrofitClient {
         return mRetrofitInstance;
     }
 
-    public RxRetrofitClient(String baseurl) {
+    private RxRetrofitClient(String baseurl) {
         Retrofit.Builder builder = new Retrofit.Builder();
         builder.client(okHttpClient);
         builder.addConverterFactory(GsonConverterFactory.create());
