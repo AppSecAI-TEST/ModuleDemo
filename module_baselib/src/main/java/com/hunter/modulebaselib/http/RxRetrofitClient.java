@@ -15,27 +15,35 @@ public class RxRetrofitClient {
     private OkHttpClient okHttpClient = RxOkHttpClient.getInstance();
 
     private static RxRetrofitClient mRetrofitInstance;
+    private static Retrofit mRetrofit;
 
     private RxRetrofitClient() {
     }
 
-    public static RxRetrofitClient getInstance() {
+    public static RxRetrofitClient getInstance(String baseurl) {
         if (mRetrofitInstance == null) {
             synchronized (RxOkHttpClient.class) {
                 if (mRetrofitInstance == null) {
-                    mRetrofitInstance = new RxRetrofitClient();
+                    mRetrofitInstance = new RxRetrofitClient(baseurl);
                 }
             }
         }
         return mRetrofitInstance;
     }
 
-    public Retrofit RxRetrofitClient(String baseurl) {
+    public RxRetrofitClient(String baseurl) {
         Retrofit.Builder builder = new Retrofit.Builder();
         builder.client(okHttpClient);
         builder.addConverterFactory(GsonConverterFactory.create());
         builder.addCallAdapterFactory(RxJava2CallAdapterFactory.create());
         builder.baseUrl(baseurl);
-        return builder.build();
+        mRetrofit = builder.build();
+    }
+
+    public <T> T create(final Class<T> service) {
+        if (service == null) {
+            throw new RuntimeException("Api service is null!");
+        }
+        return mRetrofit.create(service);
     }
 }
