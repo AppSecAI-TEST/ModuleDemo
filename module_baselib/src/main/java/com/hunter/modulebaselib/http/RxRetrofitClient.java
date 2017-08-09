@@ -7,7 +7,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * Created by HeQuanli on 2017/8/8.
- * 类说明：
+ * 类说明：Retrofit的公共类
  */
 
 public class RxRetrofitClient {
@@ -20,6 +20,11 @@ public class RxRetrofitClient {
     private RxRetrofitClient() {
     }
 
+    /**
+     * 单例，请求地址外部传进来，保证请求不同的主机地址！可以设置默认地址
+     * @param baseurl
+     * @return
+     */
     public static RxRetrofitClient getInstance(String baseurl) {
         if (mRetrofitInstance == null) {
             synchronized (RxOkHttpClient.class) {
