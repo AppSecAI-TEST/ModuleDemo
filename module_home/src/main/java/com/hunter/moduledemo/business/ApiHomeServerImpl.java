@@ -23,16 +23,14 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class ApiHomeServerImpl {
 
     public static Observable<ResultBean<List<MeiZhiBean>>> requestMeiZhiData(String category, int num, int page) {
-        return RxRetrofitClient.getInstance()
-                .RxRetrofitClient(HomeConstantUtils.REQUEST_URL)
+        return RxRetrofitClient.getInstance(HomeConstantUtils.REQUEST_URL)
                 .create(IApiHomeServer.class)
                 .getMeiZhiList(category, num, page);
     }
 
     public static Observable<WeatherResultBean<List<NowHeWeather5Bean>>> requestNowWeatherData(String category,
                                                                                                String city, String key) {
-        return RxRetrofitClient.getInstance()
-                .RxRetrofitClient(HomeConstantUtils.WEATHER_URL)
+        return RxRetrofitClient.getInstance(HomeConstantUtils.WEATHER_URL)
                 .create(IApiHomeServer.class)
                 .getNowWeather(category, city, key);
     }
