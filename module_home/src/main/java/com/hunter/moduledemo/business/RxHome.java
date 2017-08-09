@@ -1,5 +1,7 @@
 package com.hunter.moduledemo.business;
 
+import android.util.Log;
+
 import com.hunter.modulebaselib.bean.ResultBean;
 import com.hunter.modulebaselib.http.RequestException;
 import com.hunter.modulebaselib.http.RxUtil;
@@ -12,7 +14,7 @@ import io.reactivex.functions.Function;
 
 /**
  * Created by HeQuanli on 2017/7/14.
- * 类说明：
+ * 类说明：Home的统一处理返回结果
  */
 
 public class RxHome {
@@ -28,7 +30,8 @@ public class RxHome {
             public ObservableSource<T> apply(Observable<ResultBean<T>> upstream) {
                 return upstream.flatMap(new Function<ResultBean<T>, ObservableSource<T>>() {
                     @Override
-                    public ObservableSource<T> apply(ResultBean<T> tResultBean) throws Exception {
+                    public ObservableSource<T> apply(ResultBean<T> tResultBean) {
+                        Log.d("HQL","RxHome->handleMeizhiResult()");
                         if (tResultBean != null) {
                             return RxUtil.createData(tResultBean.getResults());
                         } else {
