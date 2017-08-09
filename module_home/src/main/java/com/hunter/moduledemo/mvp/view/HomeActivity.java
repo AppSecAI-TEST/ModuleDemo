@@ -93,7 +93,7 @@ public class HomeActivity extends BaseActivity<HomeListPresenter>
 
 
         mPresenter.getMeiZhiData("福利", true);
-        mPresenter.getNowWeather("now", "成都", "49c27061632b4ad6a6725b7bc9152dd3");
+       // mPresenter.getNowWeather("now", "成都", "49c27061632b4ad6a6725b7bc9152dd3");
 
         mSwiperefreshLayout.setOnRefreshListener(this);
         mSwiperefreshLayout.setColorSchemeResources(android.R.color.holo_blue_bright,

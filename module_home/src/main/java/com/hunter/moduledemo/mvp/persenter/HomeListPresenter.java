@@ -53,12 +53,8 @@ public class HomeListPresenter extends RxPresenter<HomeListContract.View>
                 }, new Consumer<Throwable>() {
                     @Override
                     public void accept(Throwable throwable) throws Exception {
-                        Log.d("HQL", throwable.getMessage());
-                    }
-                }, new Action() {
-                    @Override
-                    public void run() throws Exception {
 
+                        Log.d("HQL","HomeListPresenter->getMeiZhiData()"+throwable.getMessage());
                     }
                 });
     }

@@ -12,18 +12,15 @@ import io.reactivex.schedulers.Schedulers;
 /**
  * Created by HeQuanLi on 2017年5月20日.
  */
-public class RxUtil
-{
+public class RxUtil {
     /**
      * 统一线程处理
      *
      * @param <T>
      * @return
      */
-    public static <T> ObservableTransformer<T, T> rxSchedulerHelper()
-    {    //compose简化线程
-        return new ObservableTransformer<T, T>()
-        {
+    public static <T> ObservableTransformer<T, T> rxSchedulerHelper() {    //compose简化线程
+        return new ObservableTransformer<T, T>() {
             @Override
             public ObservableSource<T> apply(Observable<T> upstream) {
                 return upstream.subscribeOn(Schedulers.io())
@@ -39,18 +36,14 @@ public class RxUtil
      * @param <T>
      * @return
      */
-    public static <T> Observable<T> createData(final T t)
-    {
-        return Observable.create(new ObservableOnSubscribe<T>()
-        {
+    public static <T> Observable<T> createData(final T t) {
+        return Observable.create(new ObservableOnSubscribe<T>() {
             @Override
-            public void subscribe(ObservableEmitter<T> eEmitter) throws Exception {
-                try
-                {
+            public void subscribe(ObservableEmitter<T> eEmitter) {
+                try {
                     eEmitter.onNext(t);
                     eEmitter.onComplete();
-                } catch (Exception e)
-                {
+                } catch (Exception e) {
                     eEmitter.onError(e);
                 }
             }
