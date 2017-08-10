@@ -13,6 +13,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -93,7 +94,7 @@ public class HomeActivity extends BaseActivity<HomeListPresenter>
 
 
         mPresenter.getMeiZhiData("福利", true);
-       // mPresenter.getNowWeather("now", "成都", "49c27061632b4ad6a6725b7bc9152dd3");
+        // mPresenter.getNowWeather("now", "成都", "49c27061632b4ad6a6725b7bc9152dd3");
 
         mSwiperefreshLayout.setOnRefreshListener(this);
         mSwiperefreshLayout.setColorSchemeResources(android.R.color.holo_blue_bright,
@@ -133,7 +134,14 @@ public class HomeActivity extends BaseActivity<HomeListPresenter>
 
     @Override
     public void showErrorMsg(String errorMsg) {
-
+        Toast.makeText(this, errorMsg, Toast.LENGTH_SHORT).show();
+        if (mSwiperefreshLayout.isRefreshing()) {
+            mSwiperefreshLayout.setRefreshing(false);
+        }
+        if (mAdapter.isLoading()) {
+            mAdapter.loadMoreComplete();
+            mAdapter.loadMoreFail();
+        }
     }
 
     @Override
