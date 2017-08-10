@@ -19,6 +19,12 @@ public interface IApi {
 
     String WEATHER_URL = "https://free-api.heweather.com/v5/";
 
+
+    String MeiZhi_NEW_URL="http://service.picasso.adesk.com/";
+
+    //安卓壁纸app数据
+    //http://service.picasso.adesk.com/v1/vertical/category/4e4d610cdf714d2966000000/vertical?limit=10&order=new&skip=60
+
     //http://www.tngou.net/tnfs/api/list?id=2&page=2&rows=20
 
 
