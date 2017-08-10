@@ -1,5 +1,7 @@
 package com.hunter.modulebaselib.http;
 
+import com.hunter.modulebaselib.http.gson.ResponseConverterFactory;
+
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
@@ -39,7 +41,7 @@ public class RxRetrofitClient {
     private RxRetrofitClient(String baseurl) {
         Retrofit.Builder builder = new Retrofit.Builder();
         builder.client(okHttpClient);
-        builder.addConverterFactory(GsonConverterFactory.create());
+        builder.addConverterFactory(ResponseConverterFactory.create());
         builder.addCallAdapterFactory(RxJava2CallAdapterFactory.create());
         builder.baseUrl(baseurl);
         mRetrofit = builder.build();
