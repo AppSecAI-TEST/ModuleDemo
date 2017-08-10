@@ -1,6 +1,5 @@
 package com.hunter.modulebaselib.http;
 
-
 import io.reactivex.Observable;
 import io.reactivex.ObservableEmitter;
 import io.reactivex.ObservableOnSubscribe;
@@ -19,7 +18,7 @@ public class RxUtil {
      * @param <T>
      * @return
      */
-    public static <T> ObservableTransformer<T, T> rxSchedulerHelper() {    //compose简化线程
+    public static <T> ObservableTransformer<T, T> rxIoMain() {
         return new ObservableTransformer<T, T>() {
             @Override
             public ObservableSource<T> apply(Observable<T> upstream) {
