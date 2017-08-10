@@ -1,8 +1,8 @@
 package com.hunter.moduledemo.business;
 
 import com.hunter.modulebaselib.bean.ResultBean;
-import com.hunter.modulebaselib.http.RequestException;
 import com.hunter.modulebaselib.http.RxUtil;
+import com.hunter.modulebaselib.http.exception.ServerException;
 import com.hunter.moduledemo.mvp.bean.WeatherResultBean;
 
 import io.reactivex.Observable;
@@ -32,7 +32,8 @@ public class RxHome {
                         if (tResultBean != null) {
                             return RxUtil.createData(tResultBean.getResults());
                         } else {
-                            return Observable.error(new RequestException("数据请求失败"));
+                            //这儿可以传入错误信息和状态码
+                            throw new ServerException("数据请求失败，请重试！");
                         }
                     }
                 });
@@ -56,7 +57,8 @@ public class RxHome {
                         if (tResultBean != null) {
                             return RxUtil.createData(tResultBean.getHeWeather5());
                         } else {
-                            return Observable.error(new RequestException("数据请求失败"));
+                            //这儿可以传入错误信息和状态码
+                            throw new ServerException("数据请求失败，请重试！");
                         }
                     }
                 });
