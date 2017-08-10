@@ -1,7 +1,5 @@
 package com.hunter.moduledemo.business;
 
-import android.util.Log;
-
 import com.hunter.modulebaselib.bean.ResultBean;
 import com.hunter.modulebaselib.http.RequestException;
 import com.hunter.modulebaselib.http.RxUtil;
@@ -34,7 +32,7 @@ public class RxHome {
                         if (tResultBean != null) {
                             return RxUtil.createData(tResultBean.getResults());
                         } else {
-                            return Observable.error(new RequestException("服务器返回error"));
+                            return Observable.error(new RequestException("数据请求失败"));
                         }
                     }
                 });
@@ -55,12 +53,10 @@ public class RxHome {
                 return upstream.flatMap(new Function<WeatherResultBean<T>, ObservableSource<T>>() {
                     @Override
                     public ObservableSource<T> apply(WeatherResultBean<T> tResultBean) throws Exception {
-
-
                         if (tResultBean != null) {
                             return RxUtil.createData(tResultBean.getHeWeather5());
                         } else {
-                            return Observable.error(new RequestException("服务器返回error"));
+                            return Observable.error(new RequestException("数据请求失败"));
                         }
                     }
                 });
